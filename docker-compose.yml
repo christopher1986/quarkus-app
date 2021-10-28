@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:alpine
+    restart: always
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=coinance
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "80:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - SCRIPT_NAME=/pgadmin4
+volumes:
+  postgresql-data:
+    name: postgresql-coinance-volume
+  pgadmin-data:
+    name: pgadmin-coinance-volume
